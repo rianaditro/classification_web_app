@@ -1,9 +1,12 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import sys
 
 from C45 import C45Classifier
 from streamlit_image_select import image_select
+from sklearn import tree
+from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 
 
@@ -11,7 +14,13 @@ from sklearn.model_selection import train_test_split
 def preprocessing_data(filename:str) -> pd.DataFrame:
     df = pd.read_excel(filename)
     try:
-        df = df[['spesies', 'color', 'hair cross section in the tip', 'medulla cross section in the tip', 'd medula', 'index medula']]
+        # df = df[['spesies', 'color', 'hair cross section in the tip', 'medulla cross section in the tip', 'd medula', 'index medula']]
+        # for trial purpose using only categorical data
+        df = df[['spesies', 'color', 'hair cross section in the tip', 'medulla cross section in the tip']]
+        label_encoder = LabelEncoder()
+        for col in df.columns:
+            df[col] = label_encoder.fit_transform(df[col])
+
         return df
     except:
         st.error("This file does not have the following fields: spesies, color, hair cross section in the tip, medulla cross section in the tip, d medula, index medula")
@@ -34,7 +43,12 @@ def training_model(df:pd.DataFrame):
 
     return model, summary, evaluate
 
-# model = pickle.load(open("model-py-81.pkl","rb"))
+def modeling_with_sklearn(df:pd.DataFrame):
+    train_x, test_x, train_y, test_y = split_data(df)
+
+    model = tree.DecisionTreeClassifier(criterion='entropy')
+    model = model.fit(train_x, train_y)
+
 
 def calculate(var):
     st.write("calculated")
@@ -70,13 +84,32 @@ if __name__ == "__main__":
 
     if uploaded_file is not None:
         df = preprocessing_data(uploaded_file)
-        if df is not None:
-            st.dataframe(df)
+        # train_x, test_x, train_y, test_y = split_data(df)
+        # model = pickle.load(open("model-py-81.pkl","rb"))
 
-            model, summary, evaluate = training_model(df)
-            st.write(summary)
-            st.write(evaluate)
-            st.write("Nice try")
-        
+        # prediction = model.predict(test_x)
+        # evaluate = model.evaluate(test_x, test_y)
+        # summary = model.summary()
+        # st.write(prediction)
+        # st.write(test_y)
+        model, summary, evaluate = training_model(df)
+        st.write(evaluate)
+        st.write(summary)
 
-    
+
+"""
+tomorrow to do:
+morn: 
+- golek godhong
+- lebokno nang lobang
+- pak gun
+- omah ijo
+- ngumbah motor
+- bensin
+awan:
+- micek
+sore:
+- projeck
+- ml spesies use label encoder, other features uses one-hot encoding
+- implement KNN
+"""
