@@ -95,21 +95,3 @@ if __name__ == "__main__":
         model, summary, evaluate = training_model(df)
         st.write(evaluate)
         st.write(summary)
-
-
-"""
-tomorrow to do:
-morn: 
-- golek godhong
-- lebokno nang lobang
-- pak gun
-- omah ijo
-- ngumbah motor
-- bensin
-awan:
-- micek
-sore:
-- projeck
-- ml spesies use label encoder, other features uses one-hot encoding
-- implement KNN
-"""
