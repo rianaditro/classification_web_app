@@ -7,6 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
+conn = st.experimental_connection('databulu', type='sql')
 
 def preprocessing_data(filename:str):
     df = pd.read_excel(filename)
@@ -72,6 +73,14 @@ def model_pipeline(algorithm, X_train, X_test, y_train, y_test):
     accuracy = accuracy_score(prediction, y_test)
     return model, accuracy
 
+def write_result(accuracy, folds_result):
+    col_names = [f'Fold {i}' for i in range(1,11)]
+    folds_df = pd.DataFrame([folds_result], columns=col_names)
+    mean = sum(folds_result)/len(folds_result)
+
+    st.dataframe(folds_df, use_container_width=True, hide_index=True)
+    st.write(f'Average accuracy: {mean}')
+    st.write(f'Best model accuracy: {accuracy}')
 
 
 if __name__ == "__main__":
@@ -81,7 +90,11 @@ if __name__ == "__main__":
 
     if uploaded_file is not None:
         df = preprocessing_data(uploaded_file)
+
         st.dataframe(df)
 
-        st.button('Create Model', on_click=main_pipeline(df))
+        model, accuracy, folds_result = main_pipeline(df)
+
+        if st.button('Create Model', type='primary'):
+            write_result(accuracy, folds_result)
         
