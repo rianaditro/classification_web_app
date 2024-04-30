@@ -69,7 +69,6 @@ def main():
         submit_btn = st.form_submit_button("Submit")
 
         if submit_btn:
-            # predicted = 
             predicted = [tree_model.predict(tree_input)[0], knn_predict(knn_input)]
 
     if predicted is not None:
