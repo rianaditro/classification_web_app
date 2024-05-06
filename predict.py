@@ -26,7 +26,7 @@ with open("db/tree_model.pkl", "rb") as f:
 with open("db/knn_model.pkl", "rb") as f:
         knn_model = pickle.load(f)
 
-df = pd.read_excel('db/clean_data_bulu.xlsx')
+df = pd.read_excel('db/uploaded_file.xlsx')
 
 
 def knn_predict(user_input):
@@ -35,7 +35,8 @@ def knn_predict(user_input):
     counts = Counter(result)
     # 5 is the n of neighbors
     percentages = {key: count / 5 * 100 for key, count in counts.items()}
-    return percentages
+
+    return dict(sorted(percentages.items(), key=lambda item: item[1], reverse=True))
 
 def main():
     predicted = None
@@ -63,7 +64,6 @@ def main():
                     'd medula cat': to_categoric(d_medula_input, 1),
                     'index medula cat': to_categoric(index_medula_input, 2)}]
         
-        # if db is settled, this could be changed accordingly
         knn_input = [[color_value.index(color_input), hair_base_value.index(hair_base_input), hair_middle_value.index(hair_middle_input), hair_tip_value.index(hair_tip_input), medula_base_value.index(medula_base_input), medula_middle_value.index(medula_middle_input), medula_tip_value.index(medula_tip_input), std_scaled(d_rambut_input, 0), std_scaled(d_medula_input, 1), std_scaled(index_medula_input, 2)]]
         
         submit_btn = st.form_submit_button("Submit")
