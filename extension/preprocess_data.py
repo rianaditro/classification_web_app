@@ -2,27 +2,16 @@ import pandas as pd
 
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
+# this accept a single column dataframe df['d rambut'] for example
+def summary(df:pd.DataFrame):
+    mean = df.mean()
+    std = df.std()
+    p25 = df.quantile(0.25)
+    p50 = df.quantile(0.5)
+    p75 = df.quantile(0.75)
+    return [mean, std, p25, p50, p75]
 
-def mean_df(df):
-    # the value should be updated to db
-    mean_rambut = df['d rambut'].mean()
-    mean_medula = df['d medula'].mean()
-    mean_index = df['index medula'].mean()
-    return [mean_rambut, mean_medula, mean_index]
-
-def std_df(df):
-    std_rambut = df['d rambut'].std()
-    std_medula = df['d medula'].std()
-    std_index = df['index medula'].std()
-    return [std_rambut, std_medula, std_index]
-
-def percentile(df):
-    p_25 = [df['d rambut'].quantile(0.25), df['d medula'].quantile(0.25), df['index medula'].quantile(0.25)]
-    p_50 = [df['d rambut'].quantile(0.5), df['d medula'].quantile(0.5), df['index medula'].quantile(0.5)]
-    p_75 = [df['d rambut'].quantile(0.75), df['d medula'].quantile(0.75), df['index medula'].quantile(0.75)]
-    return p_25, p_50, p_75
-
-def base_processing(df):
+def base_processing(df:pd.DataFrame):
     df['color'] = df['color'].str.replace(",","")
     # standarization
     data_to_scale = df[['d rambut', 'd medula', 'index medula']]
@@ -32,12 +21,15 @@ def base_processing(df):
     df[['d rambut', 'd medula', 'index medula']] = scaled_data
     return df
 
-def tree_processing(df):
+def tree_processing(df:pd.DataFrame):
     tree_df = df.copy()
-    # check if it needs to change when using db
-    bins_d_rambut = [-float('inf'), df['d rambut'].quantile(0.25), df['d rambut'].quantile(0.5), df['d rambut'].quantile(0.75), float('inf')]
-    bins_d_medula = [-float('inf'), df['d medula'].quantile(0.25), df['d medula'].quantile(0.5), df['d medula'].quantile(0.75), float('inf')]
-    bins_index = [-float('inf'), df['index medula'].quantile(0.25), df['index medula'].quantile(0.5), df['index medula'].quantile(0.75), float('inf')]
+    rambut_summary = summary(df['d rambut'])
+    medula_summary = summary(df['d medula'])
+    index_summary = summary(df['index medula'])
+
+    bins_d_rambut = [-float('inf'), rambut_summary[2], rambut_summary[3], rambut_summary[4], float('inf')]
+    bins_d_medula = [-float('inf'), medula_summary[2], medula_summary[3], medula_summary[4], float('inf')]
+    bins_index = [-float('inf'), index_summary[2], index_summary[3], index_summary[4], float('inf')]
 
     labels = ['under 25%', 'under 50%', 'under 75%', '75% above']
     # convert numerical to categorical
@@ -47,7 +39,7 @@ def tree_processing(df):
 
     return tree_df
 
-def knn_processing(df):
+def knn_processing(df:pd.DataFrame):
     knn_df = df.copy()
     le = LabelEncoder()
     for col in df.columns:
@@ -56,7 +48,7 @@ def knn_processing(df):
     return knn_df
 
 # this is the big function of pre-processing
-def pre_processing(df):
+def pre_processing(df:pd.DataFrame):
     df = base_processing(df)
     tree_df = tree_processing(df)
     knn_df = knn_processing(df)

@@ -7,9 +7,11 @@ from sklearn.neighbors import KNeighborsClassifier
 from collections import Counter
 
 
-from extension.convert import to_categoric, std_scaled
+from extension.preprocess_data import summary
+from extension.convert_input import to_categoric, std_scaled
 
-# this should be stored as db
+
+# initialize options value
 spesies_value = ['S. barbatus', 'S. celebensis', 'S. scofa', 'S. scrofa', 'S. verrucossus']
 color_value = ['black at the base and dark brown at the tip', 'black at the base broken white at the middle dark brown at the tip', 'black at the base to the middle broken white at the tip', 'black without gradation', 'dark brown at the base and black at the tip', 'red at the base and dark brown at the tip', 'white at the base and light brown at the tip']
 hair_base_value = ['circular', 'oval', 'triangular']
@@ -26,7 +28,11 @@ with open("db/default_tree_model.pkl", "rb") as f:
 with open("db/default_knn_model.pkl", "rb") as f:
         knn_model = pickle.load(f)
 
+# initialize data
 df = pd.read_excel('db/uploaded_file.xlsx')
+rambut_summary = summary(df['d rambut'])
+medula_summary = summary(df['d medula'])
+index_summary = summary(df['index medula'])
 
 
 def knn_predict(user_input):
@@ -60,11 +66,20 @@ def main():
                     'medulla cross section in the base': medula_base_input,
                     'medulla cross section in the middle': medula_middle_input,
                     'medulla cross section in the tip': medula_tip_input,
-                    'd rambut cat': to_categoric(d_rambut_input, 0),
-                    'd medula cat': to_categoric(d_medula_input, 1),
-                    'index medula cat': to_categoric(index_medula_input, 2)}]
+                    'd rambut cat': to_categoric(d_rambut_input, rambut_summary),
+                    'd medula cat': to_categoric(d_medula_input, medula_summary),
+                    'index medula cat': to_categoric(index_medula_input, index_summary)}]
         
-        knn_input = [[color_value.index(color_input), hair_base_value.index(hair_base_input), hair_middle_value.index(hair_middle_input), hair_tip_value.index(hair_tip_input), medula_base_value.index(medula_base_input), medula_middle_value.index(medula_middle_input), medula_tip_value.index(medula_tip_input), std_scaled(d_rambut_input, 0), std_scaled(d_medula_input, 1), std_scaled(index_medula_input, 2)]]
+        knn_input = [[color_value.index(color_input), 
+                      hair_base_value.index(hair_base_input), 
+                      hair_middle_value.index(hair_middle_input), 
+                      hair_tip_value.index(hair_tip_input), 
+                      medula_base_value.index(medula_base_input), 
+                      medula_middle_value.index(medula_middle_input), 
+                      medula_tip_value.index(medula_tip_input), 
+                      std_scaled(d_rambut_input, rambut_summary), 
+                      std_scaled(d_medula_input, medula_summary), 
+                      std_scaled(index_medula_input, index_summary)]]
         
         submit_btn = st.form_submit_button("Submit")
 
