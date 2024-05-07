@@ -1,9 +1,18 @@
 import streamlit as st
 import pandas as pd
+import pickle
 import time
 
 
-from preprocess_data import *
+from preprocess_data import model_creation
+
+def save_model(model, filename):
+    with open(f'db/{filename}.pkl', 'wb') as f:
+        pickle.dump(model, f)
+
+def download_model(filename, label):
+    with open(filename, 'rb') as f:
+        btn = st.download_button(label=label, data=f, file_name=filename)
 
 
 # here is the start of the web component

@@ -8,6 +8,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from C45 import C45Classifier
 
+
+# this for pre-processing data 
 def mean_df(df):
     # the value should be updated to db
     mean_rambut = df['d rambut'].mean()
@@ -60,12 +62,14 @@ def knn_processing(df):
             knn_df[col] = le.fit_transform(df[col])
     return knn_df
 
+# this is the big function of pre-processing
 def pre_processing(df):
     df = base_processing(df)
     tree_df = tree_processing(df)
     knn_df = knn_processing(df)
     return df, tree_df, knn_df
 
+# this is the processing for modelling
 def data_training(dataset, model):
     y = dataset['spesies']
     X = dataset.drop(['spesies'], axis=1)
@@ -80,6 +84,7 @@ def data_training(dataset, model):
     accuracy = "{:.2%}".format(accuracy)
     return model, accuracy
 
+# this is the big function of modelling
 def model_creation(df):
     df, tree_df, knn_df = pre_processing(df)
     tree = C45Classifier()
@@ -87,11 +92,3 @@ def model_creation(df):
     tree_model, tree_acc = data_training(tree_df, tree)
     knn_model, knn_acc = data_training(knn_df, knn)
     return tree_model, tree_acc, knn_model, knn_acc
-
-def save_model(model, filename):
-    with open(f'db/{filename}.pkl', 'wb') as f:
-        pickle.dump(model, f)
-
-def download_model(filename, label):
-    with open(filename, 'rb') as f:
-        btn = st.download_button(label=label, data=f, file_name=filename)
