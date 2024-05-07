@@ -7,7 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from collections import Counter
 
 
-from ext.convert import to_categoric, std_scaled
+from extension.convert import to_categoric, std_scaled
 
 # this should be stored as db
 spesies_value = ['S. barbatus', 'S. celebensis', 'S. scofa', 'S. scrofa', 'S. verrucossus']
@@ -19,11 +19,11 @@ medula_base_value = ['circular', 'flower shape', 'no cavity']
 medula_middle_value = ['flower shape', 'no cavity', 'oval']
 medula_tip_value = ['circular', 'flower shape', 'oval']
 
-# # reading model
-with open("db/tree_model.pkl", "rb") as f:
+# reading default model
+with open("db/default_tree_model.pkl", "rb") as f:
         tree_model = pickle.load(f)
 
-with open("db/knn_model.pkl", "rb") as f:
+with open("db/default_knn_model.pkl", "rb") as f:
         knn_model = pickle.load(f)
 
 df = pd.read_excel('db/uploaded_file.xlsx')

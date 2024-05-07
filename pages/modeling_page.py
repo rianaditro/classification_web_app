@@ -4,7 +4,7 @@ import pickle
 import time
 
 
-from preprocess_data import model_creation
+from extension.modeling import model_creation
 
 def save_model(model, filename):
     with open(f'db/{filename}.pkl', 'wb') as f:
