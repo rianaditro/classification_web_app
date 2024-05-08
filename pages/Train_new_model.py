@@ -3,8 +3,8 @@ import pandas as pd
 import pickle
 import time
 
-
 from extension.modeling import model_creation
+
 
 def save_model(model, filename):
     with open(f'db/{filename}.pkl', 'wb') as f:
@@ -20,16 +20,17 @@ st.write('Create C5.0 and KNN model')
 file_upload = st.file_uploader('Choose file', type=['xlsx'], key='file_upload')
 
 if 'success' not in st.session_state:
-    st.success('Upload dataset for training model.')
+    st.caption("Upload your dataset file for model training.")
 else:
     st.success('Model Updated.')
 
 if file_upload is not None:
     df = pd.read_excel(file_upload)
     try:
-        df = df[['spesies', 'color', 'hair cross section in the base', 'hair cross section in the middle', 'hair cross section in the tip', 'medulla cross section in the base', 'medulla cross section in the middle', 'medulla cross section in the tip', 'd rambut', 'd medula', 'index medula']]
         st.write('Preview')
-        st.dataframe(df.head(10))
+        st.dataframe(df.head())
+
+        df = df[['spesies', 'color', 'hair cross section in the base', 'hair cross section in the middle', 'hair cross section in the tip', 'medulla cross section in the base', 'medulla cross section in the middle', 'medulla cross section in the tip', 'd rambut', 'd medula', 'index medula']]
         set_def = False
 
         submit_btn = st.button('Train Model')

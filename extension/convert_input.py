@@ -1,4 +1,4 @@
-# data standarization
+# data standarization for KNN
 def std_scaled(num, summary:list):
     mean = summary[0]
     std = summary[1]
@@ -8,18 +8,15 @@ def std_scaled(num, summary:list):
 
 # convert numerical to categorical for C5.0
 def to_categoric(num, summary:list)->str:
-    mean = summary[0]
-    std = summary[1]
     percentile_25 = summary[2]
     percentile_50 = summary[3]
     percentile_75 = summary[4]
 
-    scaled = std_scaled(num, summary)
-    if scaled <= percentile_25:
+    if num <= percentile_25:
         cat = 'under 25%'
-    elif scaled <= percentile_50:
+    elif num <= percentile_50:
         cat = 'under 50%'
-    elif scaled <= percentile_75:
+    elif num <= percentile_75:
         cat = 'under 75%'
     else:
         cat = '75% above'
