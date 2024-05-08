@@ -1,0 +1,16 @@
+credentials:
+  usernames:
+    masden:
+      name: Mas Den
+      password: "$2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS"
+    # rbriggs:
+    #   email: rbriggs@gmail.com
+    #   name: Rebecca Briggs
+    #   password: def
+cookie:
+  expiry_days: 1
+  key: signature_key
+  name: user_cookie
+# preauthorized:
+#   emails:
+#   - melsby@gmail.com

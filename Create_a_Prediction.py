@@ -2,17 +2,21 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 import pickle
+import streamlit_authenticator as stauth
+import yaml
+from yaml.loader import SafeLoader
 
 from C45 import C45Classifier
 from sklearn.neighbors import KNeighborsClassifier
 from collections import Counter
 from streamlit_image_select import image_select
 
-
 from extension.preprocess_data import summary
 from extension.convert_input import to_categoric, std_scaled
 
+
 st.set_page_config(page_title="Klasifikasi C5 dan KNN", initial_sidebar_state='collapsed')
+
 
 # initialize options value
 spesies_value = ['S. barbatus', 'S. celebensis', 'S. scofa', 'S. scrofa', 'S. verrucossus']
@@ -56,8 +60,9 @@ def knn_predict(user_input):
 
 def main():
     predicted = None
+    st.header("Create a Prediction", anchor=False)
     with st.form("user_input"):
-        st.markdown("**<span style='font-size:30px'>Input Data</span>**", unsafe_allow_html=True)
+        st.subheader("User Input", anchor=False)
         color_input = st.selectbox("Color", options=color_value)
         hair_base_input = image_select("Hair cross section in the base", hair_image, hair_base_value, return_value="index")
         hair_middle_input = image_select("Hair cross section in the middle", hair_image, hair_middle_value, return_value="index")
@@ -100,7 +105,7 @@ def main():
     if predicted is not None:
          with st.container(border=True):
             st.write("Hasil prediksi C5:")
-            st.markdown(f"**{predicted[0]}**", unsafe_allow_html=True)
+            st.write(f"**{predicted[0]}**")
             st.write("Tingkat kemiripan dengan kelas lain:")
 
             col1, col2 = st.columns(2, gap='medium')
@@ -118,4 +123,22 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # the authentication start here
+    with open('config.yaml') as f:
+        config = yaml.load(f, Loader=SafeLoader)
+
+    authenticator = stauth.Authenticate(
+        config['credentials'],
+        config['cookie']['name'],
+        config['cookie']['key'],
+        config['cookie']['expiry_days'])
+    
+    authenticator.login()
+
+    if st.session_state["authentication_status"]:
+        authenticator.logout(location='sidebar')
+        main()
+    elif st.session_state["authentication_status"] is False:
+        st.error('Username/password is incorrect')
+    elif st.session_state["authentication_status"] is None:
+        st.warning('Please enter your username and password')
