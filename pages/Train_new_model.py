@@ -65,8 +65,8 @@ if file_upload is not None:
                 st.write("Do you want to replace the current model with the updated model?")
                 set_def = st.button("Confirm")
         if set_def:
-            save_model(tree_model, 'def_tree_model')
-            save_model(knn_model, 'def_knn_model')
+            save_model(tree_model, 'default_tree_model')
+            save_model(knn_model, 'default_knn_model')
             df.to_excel('db/uploaded_file.xlsx', index=False)
 
             for key in st.session_state.keys():
