@@ -1,6 +1,8 @@
 import streamlit as st
 import streamlit_authenticator as stauth
 import yaml
+
+from streamlit_authenticator.utilities.hasher import Hasher
 from yaml.loader import SafeLoader
 
 
@@ -10,11 +12,19 @@ with open('config.yaml') as f:
 def user_info(config):
     df = []
     initial_data = config['credentials']['usernames']
+    registered_user = initial_data.keys()
+    print(registered_user)
     for username, details in initial_data.items():
         entry = {'username':username}
         entry.update(details)
         df.append(entry)
-    return df
+    return df, registered_user
+
+def input_password(edited_df, registered_user):
+    for item in edited_df:
+        if item['username'] not in registered_user:
+            item['password'] = Hasher([item['password']]).generate()[0]
+    return edited_df        
 
 def update_config(df):
     new = dict()
@@ -34,7 +44,7 @@ def save_changes(df, config):
 with st.container(border=True):
     st.subheader("User Management", anchor=False)
     user_login = config['credentials']['usernames']
-    df = user_info(config)
+    df, registered_user = user_info(config)
     
     edit_df = st.data_editor(df,column_order=['name', 'role', 'username', 'password'], 
                    column_config={'name': st.column_config.TextColumn(label='Name'),
@@ -45,7 +55,10 @@ with st.container(border=True):
     edit_btn = st.button(label='Save Changes')
     if edit_btn:
         print(edit_df)
+        edit_df = input_password(edit_df, registered_user)
+        print(edit_df)
         save_changes(edit_df, config)
+        st.rerun()
 
 
 # if __name__ == "__main__":

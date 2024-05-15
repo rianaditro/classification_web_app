@@ -4,13 +4,17 @@ cookie:
   name: user_cookie
 credentials:
   usernames:
+    andipetualang:
+      name: andi
+      password: $2b$12$3/5U9Yo3MKjXTpxLrB/j/OETMMH.ZIBelW/60yHFxjrY5F.tHoq0C
+      role: taksonom lapangan
     masden:
       name: Mas Den
       password: $2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS
       role: admin
-    sarasehan:
+    sarasehan7:
       name: sarah
-      password: '123456'
+      password: $2b$12$KOBzksUTa2UVDbKanaxXSeMKzs9WONjZG42eWMs4x6wlR9ICfYhCi
       role: mitra
     udin:
       name: Udin
