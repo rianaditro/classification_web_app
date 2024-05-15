@@ -1,21 +1,18 @@
-credentials:
-  usernames:
-    masden:
-      name: Mas Den
-      role: admin
-      password: "$2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS"
-    udin:
-      name: Udin
-      role: mitra
-      password: "$2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS"
-    # rbriggs:
-    #   email: rbriggs@gmail.com
-    #   name: Rebecca Briggs
-    #   password: def
 cookie:
   expiry_days: 1
   key: signature_key
   name: user_cookie
-# preauthorized:
-#   emails:
-#   - melsby@gmail.com
+credentials:
+  usernames:
+    masden:
+      name: Mas Den
+      password: $2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS
+      role: admin
+    sarasehan:
+      name: sarah
+      password: '123456'
+      role: mitra
+    udin:
+      name: Udin
+      password: $2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS
+      role: pengembang model

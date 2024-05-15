@@ -60,19 +60,16 @@ def main():
     st.header("Create a Prediction", anchor=False)
     with st.form("user_input"):
         st.subheader("User Input", anchor=False)
-        color_input = st.selectbox("Color", options=color_value)
-        hair_base_input = 0
-        hair_middle_input = 0
-        hair_tip_input = 0
-        # hair_base_input = image_select("Hair cross section in the base", hair_image, hair_base_value, return_value="index")
-        # hair_middle_input = image_select("Hair cross section in the middle", hair_image, hair_middle_value, return_value="index")
-        # hair_tip_input = image_select("Hair cross section in the tip", hair_tip_image, hair_tip_value, return_value="index")
+        color_input = st.selectbox("Hair Color", options=color_value)
+        hair_base_input = image_select("Hair cross section in the base", hair_image, hair_base_value, return_value="index")
+        hair_middle_input = image_select("Hair cross section in the middle", hair_image, hair_middle_value, return_value="index")
+        hair_tip_input = image_select("Hair cross section in the tip", hair_tip_image, hair_tip_value, return_value="index")
         medula_base_input = image_select("Medula cross section in the base", medula_base_image, medula_base_value, return_value="index")
         medula_middle_input = image_select("Medula cross section in the middle", medula_middle_image, medula_middle_value, return_value="index")
         medula_tip_input = image_select("Medula cross section in the tip", medula_tip_image, medula_tip_value, return_value="index")
         st.image('assets/diameter.png', caption="DM: Diameter Medula, DR: Diameter Rambut, Index medula: DM/DR")
-        d_rambut_input = st.number_input("d rambut",step=0)
-        d_medula_input = st.number_input("d medula",step=0)
+        d_rambut_input = st.number_input("Diameter rambut",step=0)
+        d_medula_input = st.number_input("Diameter medula",step=0)
         index_medula_input = st.number_input("index medula",step=1e-7,format="%.6f")
 
         tree_input = [{'color': color_input,

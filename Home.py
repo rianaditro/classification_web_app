@@ -1,6 +1,8 @@
 import streamlit as st
 
 
+st.set_page_config(page_title="Home", initial_sidebar_state="collapsed")
+
 with st.container(border=True):
     st.subheader("Sus Barbatus", anchor=False)
     col1, col2 = st.columns(2, gap="medium")
