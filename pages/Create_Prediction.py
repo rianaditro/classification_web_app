@@ -1,5 +1,4 @@
 import streamlit as st
-import matplotlib.pyplot as plt
 import pandas as pd
 import pickle
 import streamlit_authenticator as stauth
@@ -14,8 +13,6 @@ from streamlit_image_select import image_select
 from extension.preprocess_data import summary
 from extension.convert_input import to_categoric, std_scaled
 
-
-st.set_page_config(page_title="Klasifikasi C5 dan KNN", initial_sidebar_state='collapsed')
 
 
 # initialize options value
@@ -64,9 +61,12 @@ def main():
     with st.form("user_input"):
         st.subheader("User Input", anchor=False)
         color_input = st.selectbox("Color", options=color_value)
-        hair_base_input = image_select("Hair cross section in the base", hair_image, hair_base_value, return_value="index")
-        hair_middle_input = image_select("Hair cross section in the middle", hair_image, hair_middle_value, return_value="index")
-        hair_tip_input = image_select("Hair cross section in the tip", hair_tip_image, hair_tip_value, return_value="index")
+        hair_base_input = 0
+        hair_middle_input = 0
+        hair_tip_input = 0
+        # hair_base_input = image_select("Hair cross section in the base", hair_image, hair_base_value, return_value="index")
+        # hair_middle_input = image_select("Hair cross section in the middle", hair_image, hair_middle_value, return_value="index")
+        # hair_tip_input = image_select("Hair cross section in the tip", hair_tip_image, hair_tip_value, return_value="index")
         medula_base_input = image_select("Medula cross section in the base", medula_base_image, medula_base_value, return_value="index")
         medula_middle_input = image_select("Medula cross section in the middle", medula_middle_image, medula_middle_value, return_value="index")
         medula_tip_input = image_select("Medula cross section in the tip", medula_tip_image, medula_tip_value, return_value="index")
@@ -108,18 +108,8 @@ def main():
             st.write(f"**{predicted[0]}**")
             st.write("Tingkat kemiripan dengan kelas lain:")
 
-            col1, col2 = st.columns(2, gap='medium')
-            with col1:
-                #  deprecation.showPyplotGlobalUse IS NO LONGER SUPPORTED.
-                st.set_option('deprecation.showPyplotGlobalUse', False)
-                labels = [key for key, value in predicted[1].items()]
-                sizes = [value for key, value in predicted[1].items()]
-                plt.pie(sizes, labels=labels, autopct='%1.1f%%')
-                st.pyplot()
-
-            with col2:
-                for key, value in predicted[1].items():
-                    st.write(f"{key}: {value}%")
+            for key, value in predicted[1].items():
+                st.write(f"{key}: {value}%")
 
 
 if __name__ == "__main__":

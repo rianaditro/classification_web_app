@@ -98,8 +98,14 @@ if __name__ == "__main__":
     authenticator.login()
 
     if st.session_state["authentication_status"]:
-        authenticator.logout(location='sidebar')
-        main()
+        current_user = st.session_state['username']
+        current_role = config['credentials']['usernames'][current_user]['role']
+        st.session_state["role"] = current_role
+        if st.session_state["role"] == 'admin' or st.session_state['role'] == 'pengembang model':
+            authenticator.logout(location='sidebar')
+            main()
+        else:
+            st.warning("You don't have access this page")
     elif st.session_state["authentication_status"] is False:
         st.error('Username/password is incorrect')
     elif st.session_state["authentication_status"] is None:

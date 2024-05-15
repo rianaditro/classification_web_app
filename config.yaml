@@ -2,6 +2,11 @@ credentials:
   usernames:
     masden:
       name: Mas Den
+      role: admin
+      password: "$2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS"
+    udin:
+      name: Udin
+      role: mitra
       password: "$2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS"
     # rbriggs:
     #   email: rbriggs@gmail.com
