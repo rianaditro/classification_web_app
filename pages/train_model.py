@@ -4,7 +4,9 @@ import pickle
 import time
 import streamlit_authenticator as stauth
 import yaml
+
 from yaml.loader import SafeLoader
+from st_pages import show_pages_from_config, hide_pages
 
 from extension.modeling import model_creation
 
@@ -98,14 +100,25 @@ if __name__ == "__main__":
     authenticator.login()
 
     if st.session_state["authentication_status"]:
+        # get role for authorize page access
         current_user = st.session_state['username']
         current_role = config['credentials']['usernames'][current_user]['role']
         st.session_state["role"] = current_role
-        if st.session_state["role"] == 'admin' or st.session_state['role'] == 'pengembang model':
-            authenticator.logout(location='sidebar')
+
+        authenticator.logout(location='sidebar')
+        show_pages_from_config()
+        
+        # hide pages based on role: only admin and pengembang model can access
+        if st.session_state["role"] == 'pengembang model':
+            hide_pages(['User Management Page'])
+            main()
+        elif st.session_state['role'] == 'admin':
+            hide_pages([''])
             main()
         else:
-            st.warning("You don't have access this page")
+            # prevent direct access from URL
+            st.warning("You don't have access to this page")
+            authenticator.logout(location='sidebar')
     elif st.session_state["authentication_status"] is False:
         st.error('Username/password is incorrect')
     elif st.session_state["authentication_status"] is None:

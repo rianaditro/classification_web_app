@@ -3,20 +3,20 @@ import pandas as pd
 import pickle
 import streamlit_authenticator as stauth
 import yaml
-from yaml.loader import SafeLoader
 
+from yaml.loader import SafeLoader
 from C45 import C45Classifier
 from sklearn.neighbors import KNeighborsClassifier
 from collections import Counter
 from streamlit_image_select import image_select
+from st_pages import show_pages_from_config, hide_pages
 
 from extension.preprocess_data import summary
 from extension.convert_input import to_categoric, std_scaled
+from extension.load_img import load_all_images
 
 
-
-# initialize options value
-spesies_value = ['S. barbatus', 'S. celebensis', 'S. scofa', 'S. scrofa', 'S. verrucossus']
+# initialize options value for captions
 color_value = ['black at the base and dark brown at the tip', 'black at the base broken white at the middle dark brown at the tip', 'black at the base to the middle broken white at the tip', 'black without gradation', 'dark brown at the base and black at the tip', 'red at the base and dark brown at the tip', 'white at the base and light brown at the tip']
 hair_base_value = ['circular', 'oval', 'triangular']
 hair_middle_value = ['circular', 'oval', 'triangular']
@@ -25,12 +25,20 @@ medula_base_value = ['circular', 'flower shape', 'no cavity']
 medula_middle_value = ['flower shape', 'no cavity', 'oval']
 medula_tip_value = ['circular', 'flower shape', 'oval']
 
-# image list
-hair_image = ['assets/hair_circular.png', 'assets/hair_oval.png', 'assets/hair_triangular.png']
-hair_tip_image = ['assets/hair_circular.png', 'assets/hair_triangular.png']
-medula_base_image = ['assets/medula_circular.png', 'assets/medula_flower.png', 'assets/medula_no_cavity.png']
-medula_middle_image = ['assets/medula_flower.png', 'assets/medula_no_cavity.png', 'assets/medula_oval.png']
-medula_tip_image = ['assets/medula_circular.png', 'assets/medula_flower.png', 'assets/medula_oval.png']
+# hair image order: circular, oval, triangular
+# medula image order: circular, flower shape, no cavity, oval
+hair_image, medula_image = load_all_images()
+
+# maintaining image order based on input
+# hair tip image order: circular, triangular
+hair_tip_image = [hair_image[0], hair_image[2]]
+# medula tip image order: circular, flower shape, no cavity
+medula_base_image = medula_image[:3]
+# medula middle image order: flower shape, no cavity, oval
+medula_middle_image = medula_image[1:4]
+# medula tip image order: circular, flower shape, oval
+medula_tip_image = [medula_image[0], medula_image[1], medula_image[3]]
+
 
 # reading default model
 with open("db/default_tree_model.pkl", "rb") as f:
@@ -55,19 +63,43 @@ def knn_predict(user_input):
 
     return dict(sorted(percentages.items(), key=lambda item: item[1], reverse=True))
 
-def main():
+def predict_main():
     predicted = None
     st.header("Create a Prediction", anchor=False)
     with st.form("user_input"):
         st.subheader("User Input", anchor=False)
-        color_input = st.selectbox("Hair Color", options=color_value)
-        hair_base_input = image_select("Hair cross section in the base", hair_image, hair_base_value, return_value="index")
-        hair_middle_input = image_select("Hair cross section in the middle", hair_image, hair_middle_value, return_value="index")
-        hair_tip_input = image_select("Hair cross section in the tip", hair_tip_image, hair_tip_value, return_value="index")
-        medula_base_input = image_select("Medula cross section in the base", medula_base_image, medula_base_value, return_value="index")
-        medula_middle_input = image_select("Medula cross section in the middle", medula_middle_image, medula_middle_value, return_value="index")
-        medula_tip_input = image_select("Medula cross section in the tip", medula_tip_image, medula_tip_value, return_value="index")
-        st.image('assets/diameter.png', caption="DM: Diameter Medula, DR: Diameter Rambut, Index medula: DM/DR")
+        color_input = st.selectbox(label="Hair Color", options=color_value)
+        hair_base_input = image_select(label="Hair cross section in the base",
+                                       images=hair_image,
+                                       captions=hair_base_value, 
+                                       return_value="index"
+                                       )
+        hair_middle_input = image_select(label="Hair cross section in the middle",
+                                         images=hair_image,
+                                         captions=hair_middle_value, 
+                                         return_value="index"
+                                         )
+        hair_tip_input = image_select(label="Hair cross section in the tip",
+                                      images=hair_tip_image,
+                                      captions=hair_tip_value,
+                                      return_value="index"
+                                      )
+        medula_base_input = image_select(label="Medula cross section in the base", 
+                                         images=medula_base_image,
+                                         captions=medula_base_value, 
+                                         return_value="index"
+                                         )
+        medula_middle_input = image_select(label="Medula cross section in the middle", 
+                                           images=medula_middle_image,
+                                           captions=medula_middle_value, 
+                                           return_value="index"
+                                           )
+        medula_tip_input = image_select(label="Medula cross section in the tip", 
+                                        images=medula_tip_image,
+                                        captions=medula_tip_value, 
+                                        return_value="index"
+                                        )
+        st.image('static/diameter.jpg', caption="DM: Diameter Medula, DR: Diameter Rambut, Index medula: DM/DR")
         d_rambut_input = st.number_input("Diameter rambut",step=0)
         d_medula_input = st.number_input("Diameter medula",step=0)
         index_medula_input = st.number_input("index medula",step=1e-7,format="%.6f")
@@ -110,7 +142,7 @@ def main():
 
 
 if __name__ == "__main__":
-    # the authentication start here
+    # reading login credentials from yaml file
     with open('config.yaml') as f:
         config = yaml.load(f, Loader=SafeLoader)
 
@@ -120,11 +152,32 @@ if __name__ == "__main__":
         config['cookie']['key'],
         config['cookie']['expiry_days'])
     
+    # login form if not authenticated
     authenticator.login()
 
     if st.session_state["authentication_status"]:
+        # get role for authorize page access
+        current_user = st.session_state['username']
+        current_role = config['credentials']['usernames'][current_user]['role']
+        st.session_state["role"] = current_role
+
         authenticator.logout(location='sidebar')
-        main()
+        show_pages_from_config()
+        
+        # hide pages based on role
+        if st.session_state["role"] == 'mitra' or st.session_state["role"] == 'taksonom lapangan':
+            hide_pages(['Custom Prediction Page', 'Train Model Page', 'User Management Page'])
+        elif st.session_state["role"] == 'pengembang model':
+            hide_pages(['User Management Page'])
+        elif st.session_state['role'] == 'admin':
+            hide_pages([''])
+        else:
+            # prevent direct access from URL
+            st.warning("You don't have access to this page")
+            authenticator.logout(location='sidebar')
+        # page without role restriction
+        predict_main()
+
     elif st.session_state["authentication_status"] is False:
         st.error('Username/password is incorrect')
     elif st.session_state["authentication_status"] is None:
