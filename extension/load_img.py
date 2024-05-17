@@ -9,5 +9,6 @@ def load_all_images():
     medula_img = ['static/medula_circular.jpg', 'static/medula_flower.jpg', 'static/medula_no_cavity.jpg', 'static/medula_oval.jpg']
     return hair_img, medula_img
 
-def load_class_image(spesies):
-    pass
+def load_class_image():
+    barbatus_image = ['static/barbatus_image.jpg', 'static/barbatus_range.jpg']
+    return barbatus_image
