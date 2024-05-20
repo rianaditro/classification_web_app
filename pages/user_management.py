@@ -74,7 +74,7 @@ if __name__ == "__main__":
         current_role = config['credentials']['usernames'][current_user]['role']
         st.session_state["role"] = current_role
 
-        authenticator.logout(location='sidebar')
+        authenticator.logout(location='sidebar', key='logout user mgnt')
         show_pages_from_config()
         
         # hide pages based on role: only admin can access
@@ -84,7 +84,6 @@ if __name__ == "__main__":
         else:
             # prevent direct access from URL
             st.warning("You don't have access to this page")
-            authenticator.logout(location='sidebar')
     elif st.session_state["authentication_status"] is False:
         st.error('Username/password is incorrect')
     elif st.session_state["authentication_status"] is None:

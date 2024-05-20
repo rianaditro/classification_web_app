@@ -11,4 +11,7 @@ def load_all_images():
 
 def load_class_image():
     barbatus_image = ['static/barbatus_image.jpg', 'static/barbatus_range.jpg']
-    return barbatus_image
+    scrofa_image = ['static/scrofa_image.jpg', 'static/scrofa_range.jpg']
+    verrucosus_image = ['static/verrucosus_image.png', 'static/verrucosus_range.jpg']
+    celebensis_image = ['static/celebensis_image.PNG', 'static/barbatus_range.jpg']
+    return barbatus_image, scrofa_image, verrucosus_image, celebensis_image

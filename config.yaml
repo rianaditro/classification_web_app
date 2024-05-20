@@ -4,15 +4,27 @@ cookie:
   name: user_cookie
 credentials:
   usernames:
-    andipetualang:
-      name: andi
-      password: $2b$12$3/5U9Yo3MKjXTpxLrB/j/OETMMH.ZIBelW/60yHFxjrY5F.tHoq0C
-      role: taksonom lapangan
     masden:
+      failed_login_attempts: 0.0
+      logged_in: false
       name: Mas Den
       password: $2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS
       role: admin
-    udin:
+    mitraudin:
+      failed_login_attempts: 0.0
+      logged_in: false
       name: Udin
-      password: $2b$12$FjpQAHy1OTm9av5fe/wI9O43dFmXoGMyc0.pVLYcjrSrKr7f/WXHS
+      password: $2b$12$agniwtF5OPn0IS0yhesgqe6MmzYddZD0h0sl4nyuR1k2vEkHSaqpi
+      role: mitra
+    pengembangfifi:
+      failed_login_attempts: null
+      logged_in: null
+      name: fifi
+      password: $2b$12$TPD0NcOzoqdKPnvyzn4CBu0LDphE..gK6ZefLSoWeBnBD/AQR1EP6
       role: pengembang model
+    taksonomandi:
+      failed_login_attempts: 0.0
+      logged_in: false
+      name: andi
+      password: $2b$12$RXnyrcblBP2db7wNZYyKd.fb676c8TOiOwgLNpuG.AJGKFyLCmtgm
+      role: taksonom lapangan

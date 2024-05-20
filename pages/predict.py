@@ -161,12 +161,12 @@ if __name__ == "__main__":
         current_role = config['credentials']['usernames'][current_user]['role']
         st.session_state["role"] = current_role
 
-        authenticator.logout(location='sidebar')
+        authenticator.logout(location='sidebar', key='logout predict')
         show_pages_from_config()
         
         # hide pages based on role
         if st.session_state["role"] == 'mitra' or st.session_state["role"] == 'taksonom lapangan':
-            hide_pages(['Custom Prediction Page', 'Train Model Page', 'User Management Page'])
+            hide_pages(['Custom Prediction Page', 'Train Model Page', 'User Management'])
         elif st.session_state["role"] == 'pengembang model':
             hide_pages(['User Management Page'])
         elif st.session_state['role'] == 'admin':
@@ -174,7 +174,6 @@ if __name__ == "__main__":
         else:
             # prevent direct access from URL
             st.warning("You don't have access to this page")
-            authenticator.logout(location='sidebar')
         # page without role restriction
         predict_main()
 

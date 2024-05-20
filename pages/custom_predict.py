@@ -39,7 +39,7 @@ def main():
         # Confirm before replace the current model
         with st.popover("Set as default model"):
             st.write("Do you want to replace the current model with the updated model?")
-            set_def = st.button("Confirm")
+            set_def = st.button("Confirm", key='confirm btn custom predict')
             if set_def:
                 save_model(tree_model, 'default_tree_model')
                 save_model(knn_model, 'default_knn_model')
@@ -68,12 +68,12 @@ if __name__ == "__main__":
         current_role = config['credentials']['usernames'][current_user]['role']
         st.session_state["role"] = current_role
 
-        authenticator.logout(location='sidebar')
+        authenticator.logout(location='sidebar', key='logout custom predict')
         show_pages_from_config()
         
         # hide pages based on role: only admin and pengembang model can access
         if st.session_state["role"] == 'pengembang model':
-            hide_pages(['User Management Page'])
+            hide_pages(['User Management'])
             main()
         elif st.session_state['role'] == 'admin':
             hide_pages([])
@@ -81,7 +81,6 @@ if __name__ == "__main__":
         else:
             # prevent direct access from URL
             st.warning("You don't have access to this page")
-            authenticator.logout(location='sidebar')
     elif st.session_state["authentication_status"] is False:
         st.error('Username/password is incorrect')
     elif st.session_state["authentication_status"] is None:
