@@ -1,0 +1,19 @@
+[[pages]]
+path = "app.py"
+name = "Home"
+
+[[pages]]
+path = "pages/predict.py"
+name = "Create Prediction Page"
+
+[[pages]]
+path = "pages/custom_predict.py"
+name = "Custom Prediction Page"
+
+[[pages]]
+path = "pages/train_model.py"
+name = "Train Model Page"
+
+[[pages]]
+path = "pages/user_management.py"
+name = "User Management"

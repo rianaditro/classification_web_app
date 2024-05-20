@@ -1,11 +1,12 @@
 import streamlit as st
+st.set_page_config(page_title="Home", initial_sidebar_state="collapsed")
 
 from st_pages import show_pages_from_config
 
 from extension.load_img import load_all_images, load_class_image
 
 show_pages_from_config()
-st.set_page_config(page_title="Home", initial_sidebar_state="collapsed")
+
 
 # hair image order: circular, oval, triangular
 # medula image order: circular, flower shape, no cavity, oval

@@ -1,0 +1,10 @@
+[server]
+enableStaticServing = true
+
+[global]
+disableWidgetStateDuplicationWarning = true
+
+[client]
+showErrorDetails = false
+toolbarMode = "viewer"
+showSidebarNavigation = true
