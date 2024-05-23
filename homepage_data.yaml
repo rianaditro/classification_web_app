@@ -1,0 +1,91 @@
+barbatus:
+  name: Babi Berjanggut
+  class: sus barbatus
+  description: Panjang kepala-badan 122–148 cm untuk betina dan 137–152 cm untuk Jantan. Beberapa laporan menyatakan jantan dapat mencapai panjang total 208 cm; panjang ekor 17–26 cm; panjang kaki belakang 27–32 cm; tinggi total 90 cm; berat badan biasanya berkisar antara 58 hingga 83 kg, dengan betina agak lebih ringan dibandingkan jantan. Jika makanan berlimpah, berat badan bisa mencapai 200 kg. ​Spesies ini memiliki kutil yang lebih kecil dan tengkorak yang lebih memanjang dibandingkan babi kutil lainnya (Sus verrucosus), telinga yang relatif kecil, dan ekor yang panjang dengan jumbai terminal besar yang terbagi menjadi bagian anterior dan posterior yang berbeda. Warna tubuh keseluruhan Babi Berjanggut bervariasi dari kehitaman pada babi muda, hingga coklat kemerahan pucat, kuning abu-abu atau hampir putih kekuningan pada babi dewasa. Babi berjanggut beradaptasi dengan baik di hutan Dipterokarpa yang luas di Kalimantan, Semenanjung Malaysia, dan Sumatra, namun juga tercatat di rawa-rawa muara, hutan sekunder dan semua jenis hutan tua, pantai, tepian sungai, semua jenis perkebunan, pembukaan lahan dan juga pinggiran kota. Pakannya sangat beragam, antara lain buah-buahan, tumbuhan, akar-akaran, jamur, invertebrata, vertebrata kecil, telur penyu, dan bangkai. Spesies ini membentuk kelompok keluarga kecil yang biasanya terdiri dari betina dan keturunannya. Kadang-kadang, unit-unit sosial ini bergabung untuk membentuk kelompok yang lebih besar hingga ratusan individu. Jantan bersifat soliter, kecuali pada musim kawin. Wilayah jelajah bervariasi sepanjang tahun dan antar tahun. Babi berjanggut sebagian besar aktif diurnal dan melakukan migrasi tidak teratur, mengikuti musim buah-buahan. Tekanan pada Satwa ini adalah hilangnya habitat (misalnya penebangan komersial, perluasan pemukiman manusia), tekanan perburuan yang tinggi, dan berbagai penyakit menular.
+  image: static/barbatus/barbatus_image.jpg
+  map: static/barbatus/barbatus_range.jpg
+  hair: 
+    main: static/barbatus/barbatus_rambut.jpg
+    pangkal: static/barbatus/barbatus_rambut_pangkal.png
+    tengah: static/barbatus/barbatus_rambut_tengah.png
+    ujung: static/barbatus/barbatus_rambut_ujung.png
+  taksonom: 
+    Kerajaan: Animalia
+    Filum: Chordata
+    Kelas: Mammalia
+    Ordo: Artiodactyla
+    Famili: Suidae
+    Genus: Sus
+    Spesies: Sus Barbatus
+  status: Tidak Dilindungi
+  iucn: Vurnerable
+  source: https://www.iucn-wpsg.org/sunda-bearded-pig
+
+scrofa:
+  name: Babi Hutan
+  class: sus scrofa
+  description: Babi ini berukuran sedang hingga besar dengan moncong yang relatif pendek dan tidak memiliki kutil di wajah. Spesies ini dimorfik seksual dengan betina sekitar 80% ukuran jantan. Panjang kepala-badan 90–200 cm; tinggi bahu 55–110 cm; panjang ekor 15–40 cm, berat 44–320 kg. Ukurannya sangat bervariasi antar subspesies. Rambutnya kasar dan warnanya bervariasi dari coklat hingga hampir hitam, biasanya berubah menjadi keabu-abuan seiring bertambahnya usia. Anakan yang dilahirkan umumnya berwarna coklat dengan pola garis-garis coklat tua memanjang di sepanjang badannya, yang dikenal sebagai livery. Pola ini memudar antara bulan kedua dan keenam, dan anakan mencapai warna dewasa pada usia satu tahun. Babi hutan ini ditemukan di berbagai habitat, mulai dari kawasan sabana berumput, lanskap pertanian, hutan alam dan hutan tanaman tertutup hingga lahan semak terbuka dengan tutupan tertentu. Pakan babi hutan bervariasi, termasuk rumput, kacang-kacangan, buah-buahan, bangkai, akar-akaran, umbi-umbian, tanaman pangan, sampah, serangga, dan reptil kecil. Spesies ini juga dilaporkan memakan mamalia kecil. Babi hutan betina umumnya terlihat dalam keluarga yang rata-rata berjumlah 20 ekor. Jantan dewasa biasanya menyendiri di luar musim kawin. Baik betina maupun jantan menunjukkan perilaku agresif ketika menghadapi bahaya, dan cenderung aktif terutama pada siang hari, meskipun, di beberapa daerah dengan tekanan perburuan yang tinggi, telah terjadi pergeseran ke aktivitas yang lebih aktif di malam hari. Tekanan pada Tingkat lokal, mereka rentan terhadap kerusakan habitat, perburuan, dan kontaminasi genetik melalui kontak dengan babi peliharaan yang dipelihara secara bebas. Untuk persebaran di pulau Jawa teridentikasi ada yang telah hybrid dengan babi kutil Sus verrucosus.
+  image: static/scrofa/scrofa_image.jpg
+  map: static/scrofa/scrofa_range.jpg
+  hair: 
+    main: static/scrofa/scrofa_rambut.jpg
+    pangkal: static/scrofa/scrofa_rambut_pangkal.png
+    tengah: static/scrofa/scrofa_rambut_tengah.png
+    ujung: static/scrofa/scrofa_rambut_ujung.png
+  taksonom: 
+    Kerajaan: Animalia
+    Filum: Chordata
+    Kelas: Mammalia
+    Ordo: Artiodactyla
+    Famili: Suidae
+    Genus: Sus
+    Spesies: Sus Scrofa
+  status: Tidak Dilindungi
+  iucn: Least Concern
+  source: https://www.iucn-wpsg.org/eurasian-wild-boar
+
+celebensis:
+  name: Babi Kutil Sulawesi
+  class: sus celebensis
+  description: Panjang kepala-badan 800–1300 mm; tinggi bahu 70 cm; berat 40–70kg. Hewan dewasa biasanya berambut gelap, meskipun beberapa individu berwarna coklat kemerahan atau kekuningan, terkadang dengan rambut berwarna lebih terang di batang dan perut. Selalu ada garis punggung gelap, dan biasanya ada garis moncong kuning bening. Surai pendek dan 'jambul' yang jelas berupa rambut panjang di ubun-ubun atau dahi telah tercatat pada hewan penangkaran, namun pengamatan terhadap 27 hewan di alam liar di Sulawesi Utara tidak menemukan jambul ini sepanjang spesimen di kebun binatang. Anak-anaknya dilahirkan dengan lima garis horizontal berwarna coklat tua dan enam garis horizontal terang di sepanjang tubuhnya, yang hilang setelah berusia sekitar 6 bulan. Jantan dewasa memiliki tiga pasang kutil di wajah, kakinya relatif sangat pendek, dan punggungnya pendek serta agak cembung. Ekornya panjang dan berumbai. Satwa ini umumnya ditemukan di berbagai habitat di pulau-pulau Indonesia, termasuk hutan hujan, rawa, padang rumput tinggi dan daerah pertanian dari permukaan laut hingga ketinggian 2300 m, namun mereka lebih menyukai lembah. Pakannya relatif beragam, antara lain akar, buah tumbang, daun dan pucuk muda, serta invertebrata, vertebrata kecil, dan bangkai. Berbagai laporan menunjukkan bahwa spesies ini hidup menyendiri atau hidup dalam kelompok kecil yang terdiri dari 2 hingga 9 individu, umumnya terdiri dari 1–3 anak, 1–2 subdewasa, dan 1–3 dewasa. Hanya sedikit informasi yang tersedia mengenai wilayah jelajah dan pola aktivitas mereka, tetapi mereka tampaknya aktif diurnal, dan kepadatannya tampaknya dipengaruhi oleh tekanan perburuan di berbagai wilayah. Tekanan pada Satwa ini adalah hilangnya habitat melalui penggundulan hutan untuk diambil kayunya, konversi menjadi lahan pertanian, perluasan pemukiman manusia; perburuan untuk diambil dagingnya, dan hibridisasi dengan babi peliharaan.
+  image: static/celebensis/celebensis_image.png
+  map: static/celebensis/celebensis_range.png
+  hair: 
+    main: static/celebensis/celebensis_rambut.jpg
+    pangkal: static/celebensis/celeb_rambut_pangkal.png
+    tengah: static/celebensis/celeb_rambut_tengah.png
+    ujung: static/celebensis/celeb_rambut_ujung.png
+  taksonom: 
+    Kerajaan: Animalia
+    Filum: Chordata
+    Kelas: Mammalia
+    Ordo: Artiodactyla
+    Famili: Suidae
+    Genus: Sus
+    Spesies: Sus Celebensis
+  status: Tidak Dilindungi
+  iucn: Near Threatened
+  source: https://www.iucn-wpsg.org/sulawesi-warty-pig
+
+verucossus:
+  name: Babi Kutil Jawa
+  class: sus verucossus
+  description: Panjang kepala-badan 90–190 cm, tinggi bahu 70–90 cm, berat 35–150 kg. Dibandingkan dengan spesies Sus lainnya, Babi Kutil Jawa memiliki ciri wajah yang sangat memanjang, dan dimorfisme seksual yang lebih menonjol. S. verrucosus jantan mudah dibedakan dari spesies lain (setidaknya jika dilihat dari dekat) dengan adanya kutil. Pengamatan dari 2 ekor Babi kutil Jawa yang ditangkap menunjukkan bahwa kutil mulai tumbuh pada usia 17 bulan dengan berat sekitar 25–35 kg.​ Babi kutil Jawa jantan jauh lebih besar daripada betina (kira-kira 90 kg untuk jantan dibandingkan 45 kg untuk betina). Umumnya babi kutil Jawa tampak agak kemerahan, namun beberapa individu tampak agak hitam jika dilihat dari kejauhan. Rambut di ubun-ubun dan surai di belakang leher biasanya berwarna lebih terang, seringkali oranye kemerahan dan kadang-kadang mendekati pirang. Habitat umumnya di lanskap budidaya dan hutan tanaman jati (Tectona grandis), diselingi dengan padang rumput lalang (Imperata cylindrica), semak belukar, dan petak-petak hutan sekunder. Meskipun belum sepenuhnya dipahami, spesies ini tampaknya terbatas pada wilayah dengan ketinggian di bawah sekitar 800 m. Satwa ini memakan berbagai makanan hewani dan nabati, termasuk buah-buahan yang jatuh, akar-akaran, tanaman (misalnya beras), cacing dan serangga. Satwa ini umumnya terlihat dalam kelompok keluarga kecil yang terdiri dari tidak lebih dari 6 individu selama musim kawin dan lebih sedikit pada waktu lain. Secara historis, ukuran kelompok hingga 20 hewan dilaporkan. Sampai saat ini, tidak ada perkiraan wilayah jelajah atau kepadatan populasi yang tersedia. Tidak banyak yang diketahui mengenai pola aktivitas mereka, namun menurut masyarakat setempat, babi kutil Jawa tampaknya kebanyakan aktif di malam hari, mungkin karena tekanan perburuan yang sangat tinggi. Satwa ini rentan terhadap hilangnya habitat, tekanan perburuan yang tinggi, keracunan, dan hibridisasi serta persaingan dengan babi hutan.
+  image: static/veru/veru_image.png
+  map: static/veru/verrucosus_range.jpg
+  hair: 
+    main: static/veru/veru_rambut.jpg
+    pangkal: static/veru/veru_rambut_pangkal.png
+    tengah: static/veru/veru_rambut_tengah.png
+    ujung: static/veru/veru_rambut_ujung.png
+  taksonom: 
+    Kerajaan: Animalia
+    Filum: Chordata
+    Kelas: Mammalia
+    Ordo: Artiodactyla
+    Famili: Suidae
+    Genus: Sus
+    Spesies: Sus Verucossus
+  status: Tidak Dilindungi
+  iucn: Endangered
+  source: https://www.iucn-wpsg.org/javan-warty-pig
