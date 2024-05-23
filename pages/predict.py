@@ -63,9 +63,44 @@ def knn_predict(user_input):
 
     return dict(sorted(percentages.items(), key=lambda item: item[1], reverse=True))
 
+def explain():
+    dummy_data = {'Warna bulu':'black at the base broken white at the middle dark brown at the tip',
+                   'Bentuk penampang melintang rambut bagian pangkal':'circular', 
+                   'Bentuk penampang melintang rambut bagian tengah':'oval',
+                   'Bentuk penampang melintang rambut bagian ujung':'circular',
+                   'Bentuk penampang melintang medula bagian pangkal':'no cavity', 
+                   'Bentuk penampang melintang medula bagian tengah':'no cavity',
+                   'Bentuk penampang melintang medula bagian ujung':'flower shape',
+                   'diameter rambut':320000, 'diameter medula':248513, 'index medula':0.776603125}
+    with st.expander("Lihat cara kerja halaman prediksi"):
+        st.write("Semisal data yang akan diprediksi adalah sebagai berikut:")
+        for key, value in dummy_data.items():
+            st.write(f"{key}: **{value}**")
+        st.divider()
+        st.write("Input seperti berikut:")
+        st.write("Input warna bulu: **black at the base broken white at the middle dark brown at the tip**")
+        st.image('static/explain/input color.png', use_column_width=True)
+        st.write("Input bentuk penampang melintang rambut bagian pangkal: **circular**")
+        st.write("Input bentuk penampang melintang rambut bagian tengah: **oval**")
+        st.write("Input bentuk penampang melintang rambut bagian ujung: **circular**")
+        st.image('static/explain/input hair.png', use_column_width=True)
+        st.write("Input bentuk penampang melintang medula bagian pangkal: **no cavity**")
+        st.write("Input bentuk penampang melintang medula bagian tengah: **no cavity**")
+        st.write("Input bentuk penampang melintang medula bagian ujung: **flower shape**")
+        st.image('static/explain/input medula.png', use_column_width=True)
+        st.write("Input diameter rambut: **320000**")
+        st.write("Input diameter medula: **248513**")
+        st.write("Input index medula: **0.776603125**")
+        st.image('static/explain/input number.png', use_column_width=True)
+        st.write('Klik submit')
+        st.divider()
+        st.write("Hasil prediksi:")
+        st.image('static/explain/output.png', use_column_width=True)
+
 def predict_main():
     predicted = None
     st.header("Create a Prediction", anchor=False)
+    explain()
     with st.form("user_input"):
         st.subheader("User Input", anchor=False)
         color_input = st.selectbox(label="Hair Color", options=color_value)
