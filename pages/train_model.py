@@ -4,6 +4,7 @@ import pickle
 import time
 import streamlit_authenticator as stauth
 import yaml
+import base64
 
 from yaml.loader import SafeLoader
 from st_pages import show_pages_from_config, hide_pages
@@ -19,17 +20,21 @@ def download_model(filename, label):
     with open(filename, 'rb') as f:
         btn = st.download_button(label=label, data=f, file_name=filename)
 
+def download_template():
+    with open('static/template.xlsx', 'rb') as template:
+        template = template.read()
+        b64 = base64.b64encode(template)
+        return st.markdown(f"<p>Unduh <a href='data:application/octet-stream;base64,{b64.decode()}' download='template.xlsx'>template</a> untuk menyesuaikan format data</p>", unsafe_allow_html=True)
+
 # here is the start of the web component
 def main():
     st.header("Train New Model Page", anchor=False)
     with st.container(border=True):
         st.subheader("Upload files", anchor=False)
         file_upload = st.file_uploader('Choose file', type=['xlsx'], key='file_upload')
-        st.markdown("<p>Unduh <a href='db/template.xlsx'>template</a> untuk menyesuaikan format data</p>", unsafe_allow_html=True)
+        download_template()
 
-        if 'success' not in st.session_state:
-            st.caption("Upload your dataset file for model training.")
-        else:
+        if 'success' in st.session_state:
             st.success('Model Updated.')
 
         if file_upload is not None:

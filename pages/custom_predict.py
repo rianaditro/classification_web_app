@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle
 import streamlit_authenticator as stauth
-import yaml
+import yaml, base64
 
 from yaml.loader import SafeLoader
 from st_pages import show_pages_from_config, hide_pages
@@ -43,13 +43,18 @@ def replace_model(df, tree_model, knn_model):
 
         st.session_state.success = True
 
+def download_template():
+    with open('static/template.xlsx', 'rb') as template:
+        template = template.read()
+        b64 = base64.b64encode(template)
+        return st.markdown(f"<p>Unduh <a href='data:application/octet-stream;base64,{b64.decode()}' download='template.xlsx'>template</a> untuk menyesuaikan format data</p>", unsafe_allow_html=True)
 
 def main():
     st.header("Custom Prediction Page", anchor=False)
     st.divider()
     st.subheader("Upload files", anchor=False)
     dataset_upload = st.file_uploader('Pilih data training', type=['xlsx'])
-    st.markdown("<p>Unduh <a href='db/template.xlsx'>template</a> untuk menyesuaikan format data</p>", unsafe_allow_html=True)
+    download_template()
 
     if dataset_upload:
         df = pd.read_excel(dataset_upload)
