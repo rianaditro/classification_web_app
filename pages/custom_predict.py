@@ -15,37 +15,58 @@ def save_model(model, filename):
     with open(f'db/{filename}.pkl', 'wb') as f:
         pickle.dump(model, f)
 
+def validate_upload(dataframe_check):
+    main_columns = ['spesies', 'color', 'hair cross section in the tip', 'hair cross section in the middle', 'hair cross section in the base', 'medulla cross section in the base', 'medulla cross section in the middle', 'medulla cross section in the tip', 'd rambut', 'd medula', 'index medula']
+
+    if all(item in dataframe_check.columns for item in main_columns):
+        return True, "Data Telah Sesuai."
+    else:
+        return False, f"Terdapat satu atau beberapa kolom yang tidak sesuai: {main_columns}"
+    
+def load_data(df:pd.DataFrame, tree_model_upload, knn_model_upload):
+    rambut_summary = summary(df['d rambut'])
+    medula_summary = summary(df['d medula'])
+    index_summary = summary(df['index medula'])
+
+    # reading uploaded model
+    tree_model = pickle.load(tree_model_upload)
+    knn_model = pickle.load(knn_model_upload)
+    return rambut_summary, medula_summary, index_summary, tree_model, knn_model
+
+def replace_model(df, tree_model, knn_model):
+    st.write("Ganti model dengan model baru? Model lama akan terhapus.")
+    set_def = st.button("Konfirmasi", key='confirm btn custom predict')
+    if set_def:
+        save_model(tree_model, 'default_tree_model')
+        save_model(knn_model, 'default_knn_model')
+        df.to_excel('db/uploaded_file.xlsx', index=False)
+
+        st.session_state.success = True
+
+
 def main():
     st.header("Custom Prediction Page", anchor=False)
-    with st.container(border=True):
-        st.subheader("Upload files", anchor=False)
-        dataset_upload = st.file_uploader('Choose file for dataset training', type=['xlsx'])
-        tree_model_upload = st.file_uploader('Choose file for C5 model', type=['pkl'])
-        knn_model_upload = st.file_uploader('Choose file for KNN model', type=['pkl'])
+    st.divider()
+    st.subheader("Upload files", anchor=False)
+    dataset_upload = st.file_uploader('Pilih data training', type=['xlsx'])
 
-    if dataset_upload and tree_model_upload and knn_model_upload:
+    if dataset_upload:
         df = pd.read_excel(dataset_upload)
-        rambut_summary = summary(df['d rambut'])
-        medula_summary = summary(df['d medula'])
-        index_summary = summary(df['index medula'])
+        validate, valid_message = validate_upload(df)
+        if validate == False:
+            st.error(valid_message)
+        elif validate == True:
+            tree_model_upload = st.file_uploader('Pilih file untuk model C5', type=['pkl'])
+            knn_model_upload = st.file_uploader('Pilih file untuk model KNN', type=['pkl'])
 
-        # reading uploaded model
-        tree_model = pickle.load(tree_model_upload)
-
-        knn_model = pickle.load(knn_model_upload)
-        
-        predict_page()
-
-        # Confirm before replace the current model
-        with st.popover("Set as default model"):
-            st.write("Do you want to replace the current model with the updated model?")
-            set_def = st.button("Confirm", key='confirm btn custom predict')
-            if set_def:
-                save_model(tree_model, 'default_tree_model')
-                save_model(knn_model, 'default_knn_model')
-                df.to_excel('db/uploaded_file.xlsx', index=False)
-
-                st.session_state.success = True
+            if tree_model_upload and knn_model_upload:        
+                st.info(valid_message)
+                # load data
+                rambut_summary, medula_summary, index_summary, tree_model, knn_model = load_data(df, tree_model_upload, knn_model_upload)
+                predict_page()
+                # Confirm before replace the current model
+                with st.popover("Set as default model"):
+                    replace_model(df, tree_model, knn_model)
 
 
 if __name__ == "__main__":
