@@ -25,6 +25,7 @@ def main():
     with st.container(border=True):
         st.subheader("Upload files", anchor=False)
         file_upload = st.file_uploader('Choose file', type=['xlsx'], key='file_upload')
+        st.markdown("<p>Unduh <a href='db/template.xlsx'>template</a> untuk menyesuaikan format data</p>", unsafe_allow_html=True)
 
         if 'success' not in st.session_state:
             st.caption("Upload your dataset file for model training.")

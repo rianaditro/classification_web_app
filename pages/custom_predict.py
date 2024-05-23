@@ -49,6 +49,7 @@ def main():
     st.divider()
     st.subheader("Upload files", anchor=False)
     dataset_upload = st.file_uploader('Pilih data training', type=['xlsx'])
+    st.markdown("<p>Unduh <a href='db/template.xlsx'>template</a> untuk menyesuaikan format data</p>", unsafe_allow_html=True)
 
     if dataset_upload:
         df = pd.read_excel(dataset_upload)
