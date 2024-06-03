@@ -44,7 +44,7 @@ def template(data:dict):
             t1, t2 = st.columns(2)
             for item in data['taksonom']:
                 t1.write(f"**{item}**")
-                t2.write(f"{data['taksonom'][item]}")
+                t2.write(f"*{data['taksonom'][item]}*")
         with col4:
             st.image(data['map'], caption='Peta Persebaran', use_column_width=True)
         st.caption(f'Referensi: {data["source"]}')
