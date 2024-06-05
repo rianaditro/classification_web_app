@@ -28,9 +28,9 @@ def download_template():
 
 # here is the start of the web component
 def main():
-    st.header("Train New Model Page", anchor=False)
+    st.header("Sistem Identifikasi Rambut ***sus***", anchor=False)
     with st.container(border=True):
-        st.subheader("Upload files", anchor=False)
+        st.subheader("Buat Model Prediksi", anchor=False)
         file_upload = st.file_uploader('Choose file', type=['xlsx'], key='file_upload')
         download_template()
 

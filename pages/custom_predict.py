@@ -50,9 +50,9 @@ def download_template():
         return st.markdown(f"<p>Unduh <a href='data:application/octet-stream;base64,{b64.decode()}' download='template.xlsx'>template</a> untuk menyesuaikan format data</p>", unsafe_allow_html=True)
 
 def main():
-    st.header("Custom Prediction Page", anchor=False)
+    st.header("Sistem Identifikasi Rambut ***sus***", anchor=False)
     st.divider()
-    st.subheader("Upload files", anchor=False)
+    st.subheader("Buat Prediksi Custom", anchor=False)
     dataset_upload = st.file_uploader('Pilih data training', type=['xlsx'])
     download_template()
 

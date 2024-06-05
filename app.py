@@ -51,6 +51,6 @@ def template(data:dict):
 
 
 if __name__ == "__main__":
-    st.header("Home Page", anchor=False)
+    st.header("Sistem Identifikasi Rambut ***sus***", anchor=False)
     for item in data_list:
         template(data_list[item])

@@ -99,7 +99,9 @@ def explain():
 
 def predict_main():
     predicted = None
-    st.header("Create a Prediction", anchor=False)
+    st.header("Sistem Identifikasi Rambut ***sus***", anchor=False)
+    st.divider()
+    st.subheader("Buat Prediksi", anchor=False)
     explain()
     with st.form("user_input"):
         st.subheader("User Input", anchor=False)

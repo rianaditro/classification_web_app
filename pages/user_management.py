@@ -38,6 +38,8 @@ def save_changes(df, config):
         yaml.dump(config, file, default_flow_style=False)
             
 def main():
+    st.header("Sistem Identifikasi Rambut ***sus***", anchor=False)
+
     with st.container(border=True):
         st.subheader("User Management", anchor=False)
         df, registered_user = user_info(config)
